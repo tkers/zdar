@@ -1,0 +1,17 @@
+{
+    "name": "Zdar",
+    "version": "0.0.1",
+    "description": "Zdar...",
+    "author": "Tijn Kersjes",
+    "private": true,
+    "dependencies": {
+
+    },
+    "scripts" : {
+        "start" : "node ./main.js"
+    },
+    "main" : "main.js",
+    "engines": {
+        "node": "v0.10.22"
+    }
+}
