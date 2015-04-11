@@ -14,10 +14,28 @@ var ACTIONS = {
   },
   has : function (item, yes, no) {
     return function () {
-      if (INVENTORY[item])
-        return yes;
-      else
-        return no;
+      if (INVENTORY[item]) {
+        if (yes instanceof Function) {
+          yes();
+        }
+        else {
+          output(yes);
+        }
+      }
+      else {
+        if (no instanceof Function) {
+          no();
+        }
+        else {
+          output(no);
+        }
+      }
+    }
+  },
+  end : function (text) {
+    return function () {
+      output(text);
+      gameover();
     }
   }
 };
@@ -31,10 +49,13 @@ var WORLD = {
       description : "Your escape pod is still lying in the crater it created on impact. It looks badly damaged (both the pod and the surface).",
       commands : {
         look : "You take a look around. There seems to be nothing but dust on this planet, but you are able to make out 2 paths leading to the north and the east...",
-        enter : ACTIONS.goto("pod", "You enter your escape pod.")
+        enter : ACTIONS.goto("pod", "You enter your escape pod."),
+        "shoot" : ACTIONS.has("blaster", ACTIONS.take("destroyed-rock", "You skillfully aim your blaster at the rock, and pull the trigger. The rock explodes, allowing you to pass."), "You don't have anything to shoot with."),
+        "shoot rock" : ACTIONS.has("blaster", ACTIONS.take("destroyed-rock", "You skillfully aim your blaster at the rock, and pull the trigger. The rock explodes, allowing you to pass."), "You don't have anything to shoot with.")
       },
       exits : {
-
+        north : ACTIONS.has("destroyed-rock", ACTIONS.goto("clearing"), "The road to the north is blocked by a rock."),
+        east : ACTIONS.goto("dump")
       }
     },
     "pod" : {
@@ -45,9 +66,47 @@ var WORLD = {
         "take finn" : ACTIONS.take("finn", "You take Finn with you."),
         "take fish" : ACTIONS.take("finn", "You take Finn with you.")
       }
+    },
+    "dump" : {
+      name : "Garbage Dump",
+      description : "You arrive at a place which appears to be a garbage dump. There could be some usefull tools lying around.",
+      commands : {
+        search : ACTIONS.has("blaster", "You search for anything usefull, but don't find anything.", ACTIONS.take("blaster", "Between piles of garbage, you find an old blaster."))
+      },
+      exits : {
+        west : ACTIONS.goto("crash-site")
+      }
+    },
+    "clearing" : {
+      name : "Outside Spaceship",
+      description : "You found a small, dusty and forgotten spaceship. It looks capable enough to get you off this planet.",
+      exits : {
+        south : ACTIONS.goto("crash-site")
+      },
+      commands : {
+        enter : ACTIONS.goto("spaceship", "You enter the spaceship. The airlock closes behind you.")
+      }
+    },
+    "spaceship" : {
+      name : "Inside Spaceship",
+      description : "With a quick glance at the control panel, you can see that the spaceship is able to take off without any problems.",
+      commands : {
+        exit : "The airlock won't open anymore.",
+        launch : ACTIONS.has("finn", ACTIONS.goto("space", "You fasten your seatbelt and press the ignition button. The engines rumble, your seat is shaking, but soon enough, you lift off.\n\nFinn is swimming in his bowl, still uninterested in anything that is happening. As you move away from the dusty planet, you give him some food, to celebrate your survival."), ACTIONS.goto("space", "You fasten your seatbelt and press the ignition button. The engines rumble, your seat is shaking, but soon enough, you lift off."))
+      }
+    },
+    "space" : {
+      name : "Outer Space",
+      description : "Around you is nothing but vast, empty space.",
+      commands : {
+        "open airlock" : ACTIONS.end("You open the airlock..."),
+        exit : ACTIONS.end("You open the airlock...")
+      }
     }
-  }
+  },
   commands : {
+    "pat finn" : ACTIONS.has("finn", "^_^", "You scratch your head."),
+    "ask finn" : ACTIONS.has("finn", "You ask Finn for help, but your trusty goldfish isn't able to help you, even if he could understand you.", "You scratch your head."),
     "promote finn" : ACTIONS.has("finn", "You promote your trusty goldfish to admiral. Finn gives you a questioning look.", "You scratch your head.")
   }
 }

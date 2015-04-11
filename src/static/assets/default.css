@@ -24,6 +24,14 @@ b{
 	font-weight: normal;
 }
 
+hr {
+  border: none;
+  border-top: 1px solid #579798;
+  background-color: transparent;
+  height: 0px;
+  opacity: 0.5;
+}
+
 table{
 	font-size: 12px;
 }

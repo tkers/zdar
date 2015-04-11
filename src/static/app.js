@@ -54,6 +54,9 @@ function saveCommand(cmd) {
 
 function handleKeyPress(event) {
 
+	if (_end)
+		return;
+
 	if (event.keyCode == "13")
 		return handleEnter(event);
 
@@ -120,6 +123,12 @@ function run() {
 	scrollAllDown();
 }
 
+var _end = false;
+function gameover() {
+	output("<hr><br><center>G&nbsp;A&nbsp;M&nbsp;E &nbsp; O&nbsp;V&nbsp;E&nbsp;R</center>")
+	_end = true;
+	document.getElementById('inputhider').style.visibility = "hidden";
+}
 
 var blinking = true;
 function blinkCursor() {
