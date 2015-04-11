@@ -2,11 +2,11 @@ _wait = true;
 
 prevCommandN = 0;
 prevCommand = new Array();
-for(i = 1; i <= 20; i++) {
+for (i = 1; i <= 20; i++) {
 	prevCommand[i] = undefined;
 }
 
-processCommand(cmd) {
+function processCommand(cmd) {
 	setTimeout(function () {
 
 		output("<br>Que?");
