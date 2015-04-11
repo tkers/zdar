@@ -1,5 +1,3 @@
-_wait = true;
-
 prevCommandN = 0;
 prevCommand = new Array();
 for (i = 1; i <= 20; i++) {
@@ -7,12 +5,35 @@ for (i = 1; i <= 20; i++) {
 }
 
 function processCommand(cmd) {
-	setTimeout(function () {
 
-		output("<br>Que?");
+	cmd = cmd.toLowerCase();
+	words = cmd.split(" ");
 
-		_wait = false;
-	}, 1000);
+	if (words[0] === "look") {
+		return output(AREA.commands && AREA.commands.look || AREA.description);
+	}
+
+	if (words[0] === "go" && words.length > 1) {
+		if (AREA.exits && words[1] in AREA.exits) {
+			if (AREA.exits[words[1]] instanceof Function)
+				return AREA.exits[words[1]]();
+			else {
+				AREA = WORLD.areas[AREA.exits[words[1]]];
+				return output(AREA.description);
+			}
+		}
+	}
+
+	if (AREA.commands && cmd in AREA.commands) {
+		if (AREA.commands[cmd] instanceof Function) {
+			return AREA.commands[cmd]();
+		}
+		else {
+			return output(AREA.commands[cmd]);
+		}
+	}
+
+	output("You scratch your head.");
 }
 
 function saveCommand(cmd) {
@@ -36,7 +57,7 @@ function handleKeyPress(event) {
 
 function handleEnter(event) {
 
-	if (_wait || _in.value == "")
+	if (_in.value == "")
 		return;
 
 	var cmd = _in.value;
@@ -45,9 +66,8 @@ function handleEnter(event) {
 	prevCommandN = 0;
 	saveCommand(cmd);
 
-	output("<br><br>" + "<b>&rsaquo;&nbsp;" + cmd + "</b>");
+	output("<b>&rsaquo;&nbsp;" + cmd + "</b>", true);
 
-	_wait = true;
 	processCommand(cmd);
 }
 
@@ -67,9 +87,11 @@ function handleDown(event) {
 	_in.value = prevCommand[prevCommandN];
 }
 
-function output(text) {
-	_out.innerHTML = _out.innerHTML + text;
+singleLine = false;
+function output(text, userText) {
+	_out.innerHTML = _out.innerHTML + (singleLine ? "<br>" : "<br><br>") + text.split("\n").join("<br>");
 	scrollAllDown();
+	singleLine = !!userText;
 }
 
 function scrollAllDown() {
@@ -80,8 +102,8 @@ function run() {
 
 	// @TODO should load saved game here
 	// @TODO output previous saved output
-
-	_wait = false;
+	output(WORLD.intro);
+	output(AREA.description);
 
 	blinking = false;
 	document.getElementById('inputhider').style.visibility = "visible";
