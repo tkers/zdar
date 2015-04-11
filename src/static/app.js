@@ -33,6 +33,15 @@ function processCommand(cmd) {
 		}
 	}
 
+	if (WORLD.commands && cmd in WORLD.commands) {
+		if (WORLD.commands[cmd] instanceof Function) {
+			return WORLD.commands[cmd]();
+		}
+		else {
+			return output(WORLD.commands[cmd]);
+		}
+	}
+
 	output("You scratch your head.");
 }
 

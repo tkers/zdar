@@ -47,6 +47,9 @@ var WORLD = {
       }
     }
   }
+  commands : {
+    "promote finn" : ACTIONS.has("finn", "You promote your trusty goldfish to admiral. Finn gives you a questioning look.", "You scratch your head.")
+  }
 }
 
 var INVENTORY = {};
