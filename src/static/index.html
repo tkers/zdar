@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+
+<html manifest="/zdar.appcache">
+
+  <head>
+
+    <title>Zdar</title>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/icon.png" />
+
+    <link href="/assets/default.css" rel="stylesheet" type="text/css" media="all">
+
+    <script type="text/javascript" src="/app.js"></script>
+
+  </head>
+
+  <body onclick="document.getElementById('cmd').focus();">
+
+    <div class="wrap">
+      <div id="movedown">
+
+        <div id="output">
+          Project Zdar <b>[Version 0.4]</b><br>
+          Copyright (c) 2015 Tijn Kersjes<br>
+          All rights reserved<span id="blink"></span>
+        </div>
+
+        <div id="inputbar">
+          <span id="inputhider" style="visibility: hidden">
+            <span style="float:left; line-height: 1;">&rsaquo;</span>
+            <div class="cmdwrapper">
+              <input type="text" id="cmd" onkeydown="handleKeyPress(event)">
+            </div>
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+
+</html>
