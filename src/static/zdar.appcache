@@ -1,8 +1,11 @@
 CACHE MANIFEST
 
-#V-20150411-zdar-js
+#V-20150411-22:39:00
+#2d60a3eaaf00c3d3babbfe656fce9424dfbd7cab
 
 CACHE:
 /index.html
 /app.js
+/world.js
+/assets/default.css
 /assets/Dekar.woff
