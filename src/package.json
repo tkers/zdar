@@ -1,6 +1,6 @@
 {
     "name": "Zdar",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Zdar...",
     "author": "Tijn Kersjes",
     "private": true,
@@ -8,9 +8,9 @@
 
     },
     "scripts" : {
-        "start" : "node ./main.js"
+        "start" : "node app.js"
     },
-    "main" : "main.js",
+    "main" : "app.js",
     "engines": {
         "node": "v0.10.22"
     }
