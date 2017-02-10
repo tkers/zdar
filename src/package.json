@@ -2,7 +2,8 @@
     "name": "Zdar",
     "version": "0.0.2",
     "description": "Zdar...",
-    "author": "Tijn Kersjes",
+    "author": "Tijn Kersjes <tijn@divbyzero.nl>",
+    "license": "MIT",
     "private": true,
     "dependencies": {
 
