@@ -110,6 +110,8 @@ function scrollAllDown() {
 	document.getElementById('movedown').scrollTop += 5000;
 }
 
+function noop() {}
+
 function run() {
 
 	// @TODO should load saved game here
@@ -121,6 +123,31 @@ function run() {
 	document.getElementById('inputhider').style.visibility = "visible";
 	_in.focus();
 	scrollAllDown();
+
+	const allCmds = {
+		'look': noop,
+		'go north': noop,
+		'go east': noop,
+		'go south': noop,
+		'go west': noop
+	};
+
+	Object.values(WORLD.areas).forEach(function (area) {
+		Object.keys(area.commands).forEach(function (cmd) {
+		  allCmds[cmd] = noop;
+		});
+	});
+
+	Object.keys(WORLD.commands).forEach(function (cmd) {
+		allCmds[cmd] = noop;
+	})
+
+	annyang.start();
+	annyang.addCommands(allCmds);
+	annyang.addCallback('resultMatch', function (result, match, phrases) {
+		_in.value = match;
+		handleEnter();
+	});
 }
 
 var _end = false;
