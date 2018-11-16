@@ -10,8 +10,8 @@ html, body{
 }
 
 body{
-	background-color: #042732;
-	color: #33ffff;
+	background-color: #121C28;
+	color: #D3D4D4;
 	font-family: Dekar, 'Courier New';
 	line-height: 16px;
 	letter-spacing: 1px;
@@ -20,13 +20,13 @@ body{
 }
 
 b{
-	color: #579798;
+	color: #5FC8C7;
 	font-weight: normal;
 }
 
 hr {
   border: none;
-  border-top: 1px solid #579798;
+  border-top: 1px solid #5FC8C7;
   background-color: transparent;
   height: 0px;
   opacity: 0.5;
@@ -57,7 +57,7 @@ div#movedown{
 /*
 div.statusbar{
 	opacity: 0;
-	background-color: #33ffff;
+	background-color: #D3D4D4;
 	color: #042732;
 	font-weight: bold;
 	padding: 1px 0px;
@@ -65,11 +65,11 @@ div.statusbar{
 	top: 0px;
 	left: 0px;
 	right: 0px;
-}
-*/
+} */
+
 
 #blink{
-	color: #579798;
+	color: #5FC8C7;
 }
 
 div#output{
@@ -81,16 +81,14 @@ div#output{
 }
 
 div#inputbar{
-	background-color: rgba(0, 0, 0, 0.2);
-	color: #579798;
+	background-color: #0C121A;
+	color: #5FC8C7;
 	padding: 10px 10px;
 	margin: 0px;
-	/*
-	margin-top: 0px;
-	margin-bottom: 20px;
-	margin-left: 40px;
-	margin-right: 40px;
-	*/
+
+	margin: 20px;
+	box-shadow: 4px 4px 0 #000000;
+
 	-webkit-user-select: none;
 }
 
@@ -101,7 +99,7 @@ div.cmdwrapper{
 
 input#cmd{
 	background-color: transparent;
-	color: #33ffff;
+	color: #5FC8C7;
 	border: none;
 	outline: none;
 	font-family: Dekar, 'Courier New';
